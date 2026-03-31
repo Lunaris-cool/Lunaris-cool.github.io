@@ -1,0 +1,21 @@
+{
+  "entryPoints": ["src"],
+  "out": "docs",
+  "name": "Lunaris-Cool Docs",
+  "includeVersion": true,
+  "tsconfig": "./tsconfig.json",
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Proxies",
+    "Bypasses",
+    "Unenrollment",
+    "Complex Exploits"
+  ],
+  "sort": ["source-order"],
+  "theme": "default",
+  "plugin": ["typedoc-plugin-markdown"],
+  "hideBreadcrumbs": false,
+  "hidePageTitle": false,
+  "hideMembersSymbol": false,
+  "excludeExternals": true
+}
