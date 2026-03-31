@@ -1,238 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lunaris Docs</title>
-    <!-- Favicon -->
-<link rel="icon" href="favicon.ico" type="image/favicon">
+
+<link rel="icon" href="favicon.png" type="image/png">
 
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
+
 :root {
-  --bg-gradient-1: #0f0c20;
-  --bg-gradient-2: #24143a;
-  --primary: #9d4edd;
-  --primary-hover: #b062eb;
-  --bubble-glass: rgba(255,255,255,0.06);
-  --bubble-border: rgba(255,255,255,0.12);
-  --text-main: #ffffff;
-  --text-muted: rgba(255,255,255,0.6);
-  --bounce: cubic-bezier(0.175,0.885,0.32,1.4);
-  --smooth: cubic-bezier(0.4,0,0.2,1);
+--bg-gradient-1: #0f0c20;
+--bg-gradient-2: #24143a;
+--primary: #9d4edd;
+--bubble-glass: rgba(255,255,255,0.06);
+--bubble-border: rgba(255,255,255,0.12);
+--text-main: #ffffff;
+--text-muted: rgba(255,255,255,0.6);
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
-  background: linear-gradient(135deg,var(--bg-gradient-1),var(--bg-gradient-2));
-  color: var(--text-main);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+font-family: 'Nunito', sans-serif;
+background: linear-gradient(135deg,var(--bg-gradient-1),var(--bg-gradient-2));
+color: var(--text-main);
+min-height: 100vh;
+display:flex;
+flex-direction:column;
+opacity:0;
+transition:0.5s;
 }
 
-/* Top bar */
+/* Fancy Links */
+
+a {
+color: #c77dff;
+background: rgba(157,78,221,0.12);
+padding: 2px 8px;
+border-radius: 6px;
+text-decoration: none;
+font-weight:600;
+transition:0.25s;
+}
+
+a:hover {
+background: rgba(157,78,221,0.25);
+box-shadow:0 0 10px rgba(157,78,221,0.25);
+}
+
+/* Layout */
+
 .topbar {
-  background: rgba(20,15,35,0.6);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--bubble-border);
-  padding: 0 40px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+height:70px;
+display:flex;
+align-items:center;
+padding:0 30px;
+background: rgba(20,15,35,0.6);
+border-bottom:1px solid var(--bubble-border);
+font-weight:800;
+cursor:pointer;
 }
 
-.topbar-brand {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.3s var(--bounce);
+.container {
+display:flex;
 }
-.topbar-brand:hover {transform: translateY(-2px); text-shadow:0 0 15px var(--primary);}
 
-.search-container {position: relative;}
-.search-input {
-  background: rgba(0,0,0,0.3);
-  border: 2px solid var(--bubble-border);
-  color: var(--text-main);
-  padding: 10px 16px 10px 42px;
-  border-radius: 999px;
-  font-size: 15px;
-  font-weight: 600;
-  width: 280px;
-  transition: all 0.3s var(--smooth);
-  outline: none;
-  backdrop-filter: blur(10px);
-}
-.search-input::placeholder {color: var(--text-muted); font-weight:500;}
-.search-input:focus {border-color: var(--primary); background: rgba(0,0,0,0.5); width: 320px;}
-.search-icon {
-  position: absolute;
-  left: 16px;
-  top:50%;
-  transform: translateY(-50%);
-  width:18px;
-  height:18px;
-  color: var(--text-muted);
-  pointer-events: none;
-  transition: color 0.3s;
-}
-.search-input:focus ~ .search-icon {color: var(--primary);}
-
-/* Container */
-.container {display:flex; flex:1; min-height: calc(100vh-80px);}
-
-/* Sidebar */
 .sidebar {
-  width:260px;
-  background: rgba(20,15,35,0.6);
-  backdrop-filter: blur(24px);
-  border-right:1px solid var(--bubble-border);
-  padding:1rem 0.8rem;
-  display:flex;
-  flex-direction: column;
+width:260px;
+background: rgba(20,15,35,0.6);
+backdrop-filter: blur(24px);
+padding:1rem;
 }
+
 .sidebar a {
-  display:block;
-  padding:0.5rem 1rem;
-  color: var(--text-main);
-  text-decoration:none;
-  border-radius:6px;
-  transition: all 0.3s var(--smooth);
+display:block;
+margin-bottom:6px;
 }
-.sidebar a.active, .sidebar a:hover {background: var(--bubble-glass); color: var(--primary);}
 
-/* Main content */
 .content {
-  flex:1;
-  padding:2rem 3rem;
-  overflow-y:auto;
+flex:1;
+padding:2rem;
 }
-section {
-  margin-bottom:2rem;
-  background: var(--bubble-glass);
-  border:1px solid var(--bubble-border);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.2);
-  transition: transform 0.2s var(--bounce);
-}
-section:hover {transform: translateY(-3px);}
-h1,h2 {margin-bottom:1rem; color:var(--text-main);}
-a {color: var(--primary); text-decoration:none;}
-a:hover {text-decoration:underline;}
 
-/* Responsive */
-@media(max-width:900px){.sidebar{display:none;}}
+section {
+background: var(--bubble-glass);
+border:1px solid var(--bubble-border);
+padding:25px;
+border-radius:20px;
+margin-bottom:2rem;
+}
+
+.tip {
+background: rgba(120,80,255,0.15);
+border:1px solid rgba(120,80,255,0.3);
+padding:15px;
+border-radius:12px;
+margin-top:10px;
+}
+
+.warning {
+background: rgba(255,70,70,0.1);
+border:1px solid rgba(255,70,70,0.4);
+padding:15px;
+border-radius:12px;
+margin-top:10px;
+}
+
+.copy-box {
+background: rgba(255,255,255,0.05);
+padding:10px 14px;
+border-radius:10px;
+cursor:pointer;
+margin-top:8px;
+display:inline-block;
+border:1px solid var(--bubble-border);
+transition:0.2s;
+}
+
+.copy-box:hover {
+background: rgba(157,78,221,0.2);
+}
+
 </style>
+
 </head>
 
 <body>
-<div class="topbar">
-  <div class="topbar-brand" onclick="window.location.href='index.html'">
-    <i data-lucide="home"></i> Lunaris Docs
-  </div>
-  <div class="search-container">
-    <input type="text" id="searchInput" class="search-input" placeholder="Search sections...">
-    <i data-lucide="search" class="search-icon"></i>
-  </div>
+
+<div class="topbar" onclick="window.location.href='index.html'">
+Lunaris Docs
 </div>
 
 <div class="container">
-  <nav class="sidebar">
-    <a href="index.html" class="home-link">Home</a>
-    <span style="color: var(--text-muted); padding:0.5rem 1rem; font-size:0.85rem;">Guides</span>
-    <a href="#guides">Getting Started</a>
-    <a href="#proxies">Proxies</a>
-    <a href="#unblock">Unblock</a>
-    <a href="#faq">FAQ</a>
-  </nav>
 
-  <main class="content">
-    <section id="home">
-      <h1>Welcome to Lunaris Docs</h1>
-      <p>This is your main documentation hub. Use the sidebar to navigate.</p>
-    </section>
+<nav class="sidebar">
+<a href="index.html">Home</a>
 
-    <section id="guides">
-      <h2>Getting Started</h2>
-      <ul>
-        <li>Step 1: Setup your workspace</li>
-        <li>Step 2: Explore guides</li>
-        <li>Step 3: Try examples</li>
-      </ul>
-    </section>
+<div style="margin-top:15px;color:var(--text-muted)">Guides</div>
 
-    <section id="proxies">
-      <h2>Proxies Setup</h2>
-      <ul>
-        <li>Choose proxy provider</li>
-        <li>Set proxy in config</li>
-        <li>Test connectivity</li>
-      </ul>
-    </section>
+<a href="#quicktips">Quick Tips</a>
+<a href="#getting">Getting Started</a>
+<a href="#proxies">Proxies / Games</a>
+<a href="#bypasses">Bypasses</a>
+<a href="#unenroll">Unenrollment</a>
+<a href="#faq">FAQ</a>
 
-    <section id="unblock">
-      <h2>Unblock Instructions</h2>
-      <ul>
-        <li>Check network restrictions</li>
-        <li>Apply unblock configuration</li>
-        <li>Test accessibility</li>
-      </ul>
-    </section>
+</nav>
 
-    <section id="faq">
-      <h2>FAQ</h2>
-      <ul>
-        <li>How do I get started? — See Getting Started.</li>
-        <li>How do I configure proxies? — See Proxies Setup.</li>
-        <li>How do I unblock content? — See Unblock Instructions.</li>
-      </ul>
-    </section>
-  </main>
+<main class="content">
+
+<section id="quicktips">
+<h2>Quick Tips</h2>
+
+<div class="tip">
+Want to play games during class? Make sure to use about:blank or blob cloaking
+</div>
+
+<div class="tip">
+Always make sure you know what kernver you are and what version
+</div>
+
+<div class="tip">
+Always remember to reserve some excess proxy links for yourself if you ever need them
+</div>
+
+</section>
+
+<section id="getting">
+
+<h2>Getting Started</h2>
+
+<h3>Get to know your Kernver & Version</h3>
+<p>
+Knowing your kernver helps determine what exploits work.
+</p>
+
+<h3>Get to know your local sysadmin community</h3>
+
+<p>
+Visit  
+<a href="https://reddit.com/r/k12sysadmin" target="_blank">
+reddit.com/r/k12sysadmin
+</a>
+</p>
+
+</section>
+
+<section id="proxies">
+
+<h2>Proxies / Games</h2>
+
+<h3>Most Reliable Proxies</h3>
+
+<p>
+Fern — <a href="https://fern.best" target="_blank">fern.best</a>
+</p>
+
+<div class="copy-box" onclick="copy('92.38.177.17')">
+Click to copy BYOD IP: 92.38.177.17
+</div>
+
+<br><br>
+
+<p>
+GN-Math — <a href="https://gn-math.dev" target="_blank">gn-math.dev</a>
+</p>
+
+<div class="copy-box" onclick="copy('154.12.247.42')">
+Click to copy BYOD IP: 154.12.247.42
+</div>
+
+<p>Fastly Supported</p>
+
+<h3>Creating Links</h3>
+
+<p>
+To create a proxy or game link, you can use static hosts to deploy.
+Many proxies may not allow you to deploy statically because they have fullstack backends.
+</p>
+
+<p>
+To deploy these proxies go to  
+<a href="https://freedns.afraid.org" target="_blank">
+freedns.afraid.org
+</a>
+and make an account.
+</p>
+
+<p>
+Choose a domain of your choice from the registry (check if it's unblocked) then type in the BYOD ip of the site.
+</p>
+
+<h3>Fastly</h3>
+
+<p>
+Fastly is requiring you to add a payment method now.
+</p>
+
+<p>
+For those of you with legacy fastly accounts, you can add a cdn service:
+</p>
+
+<div class="copy-box" onclick="copy('your-name.global.ssl.fastly.net')">
+Click to copy: your-name.global.ssl.fastly.net
+</div>
+
+<p>
+Import from literally anywhere. This method can work on school wifi also, and the domain is unblocked for many.
+</p>
+
+</section>
+
+<section id="bypasses">
+
+<h2>Bypasses</h2>
+
+<h3>Cormada</h3>
+
+<p>
+CORMADA Requires powerwash.  
+Exploit using Omada DNS.
+Created by Jolly Sydney & cuhassle.
+</p>
+
+<ol>
+<li>Powerwash</li>
+<li>Set DNS servers:
+<div class="copy-box" onclick="copy('66.23.198.252')">66.23.198.252</div>
+<div class="copy-box" onclick="copy('66.94.105.229')">66.94.105.229</div>
+</li>
+<li>Continue normally</li>
+</ol>
+
+<h3>Corkey</h3>
+
+<ol>
+<li>Powerwash Chromebook</li>
+<li>Turn off Wi-Fi</li>
+<li>Restart</li>
+<li>Check extensions</li>
+</ol>
+
+</section>
+
+<section id="unenroll">
+
+<h2>Unenrollment</h2>
+
+<h3>Aurora</h3>
+
+<p>
+Recovery image/shim manager with WiFi support.
+Merged version of Priism & IRS.
+</p>
+
+<ol>
+<li>Build or download image</li>
+<li>Flash & boot</li>
+<li>Unenroll with quicksilver</li>
+</ol>
+
+<div class="warning">
+Warning: Improper flashing can brick your Chromebook
+</div>
+
+<h3>Quicksilver</h3>
+
+<a href="https://unenrollment.com/goodsilver" target="_blank">
+unenrollment.com/goodsilver
+</a>
+
+<p>
+Download and flash with flasher of your choice then run command on Chromebook.
+</p>
+
+</section>
+
+<section id="faq">
+
+<h2>FAQ</h2>
+
+<h3>What is a proxy?</h3>
+<p>
+A proxy is a middleman between you and the server.
+Think of it as a browser in a browser.
+</p>
+
+<h3>How do I check kernver?</h3>
+<p>
+Check the kernver section
+</p>
+
+<h3>Quick revive Chromebook?</h3>
+<p>
+Press refresh + power
+</p>
+
+<h3>How do I load a shim?</h3>
+<p>
+Check flashing & booting section
+</p>
+
+</section>
+
+</main>
+
 </div>
 
 <script>
-  lucide.createIcons();
 
-  // Fade-in page
-  window.addEventListener('DOMContentLoaded', () => {
-    document.body.style.opacity = '1';
-  });
+window.addEventListener('DOMContentLoaded',()=>{
+document.body.style.opacity="1"
+})
 
-  // Sidebar links
-  const links = document.querySelectorAll('.sidebar a:not(.home-link)');
-  links.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      links.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
-      document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
-    });
-  });
+document.querySelectorAll('.sidebar a').forEach(link=>{
+link.addEventListener('click',e=>{
+if(link.getAttribute("href").startsWith("#")){
+e.preventDefault()
+document.querySelector(link.getAttribute("href")).scrollIntoView({
+behavior:"smooth"
+})
+}
+})
+})
 
-  // Search filter
-  const searchInput = document.getElementById('searchInput');
-  searchInput.addEventListener('input', e => {
-    const filter = e.target.value.toLowerCase();
-    document.querySelectorAll('section').forEach(sec => {
-      sec.style.display = sec.innerText.toLowerCase().includes(filter) ? 'block' : 'none';
-    });
-  });
+function copy(text){
+navigator.clipboard.writeText(text)
+}
+
 </script>
+
 </body>
 </html>
