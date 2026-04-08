@@ -1,73 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lunaris Docs - Welcome</title>
-  <!-- Favicon -->
-<link rel="icon" href="favicon.ico" type="image/favicon">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lunarite</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
-:root {
-  --bg-gradient-1: #0f0c20;
-  --bg-gradient-2: #24143a;
-  --primary: #9d4edd;
-  --primary-hover: #b062eb;
-  --bubble-glass: rgba(255,255,255,0.06);
-  --bubble-border: rgba(255,255,255,0.12);
-  --text-main: #ffffff;
-  --text-muted: rgba(255,255,255,0.6);
-  --bounce: cubic-bezier(0.175,0.885,0.32,1.4);
-  --smooth: cubic-bezier(0.4,0,0.2,1);
-}
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Inter', sans-serif;
+		}
 
-* {margin:0; padding:0; box-sizing:border-box;}
-body {
-  font-family: 'Nunito', sans-serif;
-  background: linear-gradient(135deg,var(--bg-gradient-1),var(--bg-gradient-2));
-  color: var(--text-main);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-  text-align:center;
-  transition: opacity 0.5s ease;
-}
+		body {
+			background: #0b0b0f;
+			color: #e6e6eb;
+			overflow-x: hidden;
+		}
 
-h1 {font-size:3rem; margin-bottom:1rem;}
-p {font-size:1.2rem; margin-bottom:2rem; color:var(--text-muted);}
+		/* Background Glow */
+		.bg {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: radial-gradient(circle at 20% 30%, #1c1c2e, transparent 40%),
+				radial-gradient(circle at 80% 70%, #151526, transparent 40%);
+			z-index: -1;
+		}
 
-#getStartedBtn {
-  padding: 14px 28px;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-main);
-  background: var(--primary);
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s var(--smooth);
-}
-#getStartedBtn:hover {background: var(--primary-hover);}
-</style>
+		.container {
+			max-width: 1100px;
+			margin: auto;
+			padding: 40px 20px;
+		}
+
+		/* Header */
+		.header {
+			display: flex;
+			align-items: center;
+			gap: 30px;
+			padding: 40px;
+			background: rgba(255, 255, 255, 0.02);
+			border: 1px solid rgba(255, 255, 255, 0.05);
+			border-radius: 20px;
+			backdrop-filter: blur(10px);
+			flex-wrap: wrap;
+		}
+
+		.pfp {
+			width: 120px;
+			height: 120px;
+			border-radius: 50%;
+			object-fit: cover;
+			border: 3px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.name {
+			font-size: 32px;
+			font-weight: 600;
+		}
+
+		.tag {
+			color: #9ca3af;
+			margin-top: 4px;
+		}
+
+		.desc {
+			margin-top: 15px;
+			line-height: 1.6;
+			color: #c9c9d4;
+		}
+
+		/* Cards */
+		.grid {
+			margin-top: 30px;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 20px;
+		}
+
+		.card {
+			padding: 25px;
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.02);
+			border: 1px solid rgba(255, 255, 255, 0.05);
+			transition: 0.25s ease;
+			cursor: pointer;
+		}
+
+		.card:hover {
+			transform: translateY(-5px);
+			border-color: rgba(255, 255, 255, 0.12);
+		}
+
+		.card-title {
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+
+		.card-desc {
+			color: #a1a1aa;
+			font-size: 14px;
+			line-height: 1.5;
+		}
+
+		/* Buttons */
+		.buttons {
+			margin-top: 20px;
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		.btn {
+			padding: 10px 16px;
+			border-radius: 10px;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			cursor: pointer;
+			transition: .2s;
+			font-size: 14px;
+		}
+
+		.btn:hover {
+			background: rgba(255, 255, 255, 0.09);
+		}
+
+		.footer {
+			margin-top: 50px;
+			text-align: center;
+			color: #6b7280;
+			font-size: 13px;
+		}
+
+		.fade {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+
+		.fade.show {
+			opacity: 1;
+			transform: translateY(0);
+			transition: 0.7s ease;
+		}
+	</style>
 </head>
 
 <body>
-  <h1>Welcome to Lunaris Docs</h1>
-  <p>Modern, clean documentation with bubbly glassmorphism style. (vibecoded) but with actual shit</p>
-  <button id="getStartedBtn">Get Started</button>
 
-  <script>
-    document.getElementById('getStartedBtn').addEventListener('click', () => {
-      document.body.style.opacity = '0';
-      setTimeout(() => {
-        window.location.href = 'docs.html';
-      }, 500);
-    });
-  </script>
+	<div class="bg"></div>
+
+	<div class="container">
+
+		<div class="header fade">
+
+			<img class="pfp" src="https://wallpapers.com/images/hd/anime-girls-pfp-white-hair-h0s8q01mhy9pdep7.jpg">
+
+			<div>
+				<div class="name">Lunarite</div>
+				<div class="tag">he/him • 15 • developer</div>
+
+				<div class="desc">
+					I vibecode, but at least I don't codevibe.<br><br>
+15 year old developer building random things on the internet.<br>
+Mostly working with proxies, UI experiments, and whatever<br>
+seems interesting at 2am.
+				</div>
+
+					<div class="buttons">
+						<div class="btn" onclick="copyDiscord()">Discord</div>
+						<div class="btn" onclick="openGithub()">Github</div>
+						<div class="btn" onclick="scrollProjects()">Projects</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="grid">
+
+				<div class="card fade" onclick="window.open('https://besteducationschool.global.ssl.fastly.net', '_blank')">
+					<div class="card-title">Edulearn</div>
+					<div class="card-desc">
+						Working on with Conall Sadako.
+					</div>
+				</div>
+
+				<div class="card fade">
+					<div class="card-title">Skills</div>
+					<div class="card-desc">
+						HTML • CSS • JavaScript<br>
+UI Design • Proxy Development<br>
+Random late night coding
+				</div>
+					</div>
+
+					<div class="card fade">
+						<div class="card-title">Currently</div>
+						<div class="card-desc">
+							Currently vibecoding.
+						</div>
+					</div>
+
+				</div>
+
+				<div class="footer fade">
+					Lunarite © 2026
+				</div>
+
+			</div>
+
+			<script>
+				function copyDiscord() {
+			navigator.clipboard.writeText(".lunarite");
+			alert("Discord copied");
+		}
+
+		function openGithub() {
+			window.open("https://github.com/vibec3der", "_blank");
+		}
+
+		function scrollProjects() {
+			window.scrollTo({
+				top: document.body.scrollHeight,
+				behavior: "smooth"
+			});
+		}
+
+		const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("show");
+				}
+			});
+		});
+
+		document.querySelectorAll(".fade").forEach(el => {
+			observer.observe(el);
+		});
+			</script>
+
 </body>
+
 </html>
